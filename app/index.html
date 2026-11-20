@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">V</span>
+    <div>
+      <h1>Vice Cover Studio</h1>
+      <p>Turn your photo + a caption into GTA-style cover art. Offline, nothing uploads.</p>
+    </div>
+  </div>
+  <ol class="steps" aria-label="Steps">
+    <li data-step="1" class="done">1 · Photo</li>
+    <li data-step="2">2 · Panels</li>
+    <li data-step="3">3 · Caption</li>
+    <li data-step="4">4 · Export</li>
+  </ol>
+</header>
+
+<main class="layout">
+  <section class="editor" aria-label="Cover editor">
+    <div class="preview-wrap">
+      <canvas id="cover" width="1080" height="1080" aria-label="Live cover preview"></canvas>
+      <p class="hint" id="panelHint">Click a panel to select it, then drag the photo inside it to move it.</p>
+    </div>
+    <div class="size-row" role="group" aria-label="Post size">
+      <button type="button" class="size-btn active" data-size="square">Square · 1080 × 1080</button>
+      <button type="button" class="size-btn" data-size="portrait">Portrait · 1080 × 1350</button>
+      <button type="button" class="size-btn" data-size="wide">Wide · 1920 × 1080</button>
+    </div>
+  </section>
+
+  <aside class="controls" aria-label="Controls">
+    <section class="panel-box">
+      <h2>1 · Your photos</h2>
+      <p class="sub">Photos stay on your machine — they are never uploaded.</p>
+      <label class="file-btn">Add photos
+        <input id="photos" type="file" accept="image/*" multiple>
+      </label>
+      <div class="thumbs" id="thumbs"></div>
+      <div class="sample-row">
+        <span>Or try a sample:</span>
+        <button type="button" data-sample="sunset">Sunset</button>
+        <button type="button" data-sample="pier">Pier</button>
+        <button type="button" data-sample="city">City</button>
+      </div>
+      <button type="button" id="onePhoto" class="ghost-btn">Fill every panel with photo 1</button>
+    </section>
+
+    <section class="panel-box">
+      <h2>2 · Panels</h2>
+      <p class="sub">Selected panel: <strong id="selectedPanel">Hero</strong></p>
+      <label>Photo in this panel
+        <select id="panelPhoto"></select>
+      </label>
+      <label>Zoom <span class="val" id="zoomVal">100%</span>
+        <input id="zoom" type="range" min="50" max="300" value="100">
+      </label>
+      <label>Move left / right
+        <input id="panX" type="range" min="-100" max="100" value="0">
+      </label>
+      <label>Move up / down
+        <input id="panY" type="range" min="-100" max="100" value="0">
+      </label>
+      <label>Layout
+        <select id="layout">
+          <option value="poster">Poster — hero + two panels</option>
+          <option value="split">Split — three equal panels</option>
+          <option value="strip">Strip — hero + wide strip</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="panel-box">
+      <h2>3 · Caption</h2>
+      <label>Caption
+        <input id="caption" type="text" maxlength="32" value="VICE SUNSET">
+      </label>
+      <label>Tagline
+        <input id="tagline" type="text" maxlength="48" value="ONE LAST RIDE · VICE CITY">
+      </label>
+      <label>Caption size <span class="val" id="capVal">100%</span>
+        <input id="capSize" type="range" min="60" max="150" value="100">
+      </label>
+      <label>Colour grade
+        <select id="theme">
+          <option value="sunset">Sunset — magenta &amp; orange</option>
+          <option value="neon">Neon night — cyan &amp; magenta</option>
+          <option value="palm">Palm day — teal &amp; gold</option>
+          <option value="noir">Noir — black &amp; white</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="panel-box">
+      <h2>4 · Export PNG</h2>
+      <button type="button" id="export" class="export-btn">Export this size</button>
+      <button type="button" id="exportAll" class="ghost-btn">Export all 3 sizes</button>
+      <p id="status" role="status"></p>
+      <p class="fine">Original art made by you. No game logos, artwork or fonts are used.</p>
+    </section>
+  </aside>
+</main>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
